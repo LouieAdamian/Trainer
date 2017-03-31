@@ -26,7 +26,7 @@ var opts = {
 }
 var Webcam = NodeWebcam.create(opts);
 
-if (true) {
+if (true/*image capture request*/) {
   Webcam.capture("dog.jpg");
 
     var img = {

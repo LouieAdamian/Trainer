@@ -11,33 +11,9 @@ var visual_recognition = watson.visual_recognition({
 //     sit_positive_examples: fs.createReadStream('./training/sitTrainingDataset.zip'),
 //     stand_positive_examples: fs.createReadStream('./training/standTrainingDataset.zip')
 // };
-//
-// visual_recognition.createClassifier(params,
-// 	function(err, response) {
-//    	 if (err)
-//       		console.log(err);
-//     	 else
-//    		console.log(JSON.stringify(response, null, 2));
-// });
-//  visual_recognition.getClassifier({
-// 	classifier_id: 'position_1883125953' },
-// 	function(err, response) {
-// 	 if (err)
-// 		console.log(err);
-// 	 else
-// 		console.log(JSON.stringify(response, null, 2));
-// 	}
-// );
-// visual_recognition.deleteClassifier({
-// 	classifier_id: 'position_1328877135' },
-// 	function(err, response) {
-// 	 if (err)
-// 		console.log(err);
-// 	 else
-// 		console.log(JSON.stringify(response, null, 2));
-// 	}
-// );
-visual_recognition.listClassifiers({},
+
+ visual_recognition.getClassifier({
+	classifier_id: 'position_185473635' },
 	function(err, response) {
 	 if (err)
 		console.log(err);

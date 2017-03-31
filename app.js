@@ -1,4 +1,4 @@
-var NodeWebcam = require("node-webcam");
+  var NodeWebcam = require("node-webcam");
 var fs = require('fs');
 var watson = require('watson-developer-cloud');
 var visual_recognition = watson.visual_recognition({
@@ -26,9 +26,16 @@ var opts = {
 }
 var Webcam = NodeWebcam.create(opts);
 
-if (true) {
-  Webcam.capture("dog.jpg");
 
+NodeWebcam.capture("dog.jpg", {}, function(err, data) {
+
+    if (!err) {}
+    console.log("Image created!");
+    classify();
+});
+
+
+function classify() {
     var img = {
         images_file: fs.createReadStream('./dog.jpg'),
         classifier_ids: 'position_185473635'
@@ -37,15 +44,13 @@ if (true) {
         if (err) {
             console.log(err);
         } else {
-            //console.log(JSON.stringify(res, null, 2));
             pos_res = res;
-
-            console.log(JSON.stringify(pos_res, null, 2))
-
+            //console.log(JSON.stringify(pos_res, null, 2))
             position = pos_res.images[0].classifiers[0].classes[0].class;
-            var obj = res;
             console.log(position);
-
+            err = pos_res.images[0].error[0].description
+            console.log(err);
+      //      fs.unlink('dog.jpg')
         }
     });
 }

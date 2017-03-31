@@ -21,7 +21,7 @@ var opts = {
     help: [Boolean, false],
 
     version: [Boolean, false],
-    location: "./resources/dog.jpg"
+    location: "./dog.jpg"
 
 }
 var Webcam = NodeWebcam.create(opts);
@@ -30,7 +30,7 @@ if (true) {
   Webcam.capture("dog.jpg");
 
     var img = {
-        images_file: fs.createReadStream('./resources/dog.jpg'),
+        images_file: fs.createReadStream('./dog.jpg'),
         classifier_ids: 'position_185473635'
     }
     visual_recognition.classify(img, function(err, res) {

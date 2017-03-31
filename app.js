@@ -1,3 +1,4 @@
+var fs = require('fs');
 var watson = require('watson-developer-cloud');
 var visual_recognition = watson.visual_recognition({
     api_key: '290ef006ab8edf8c61fd8bed56fb9c85a103295a',
@@ -5,9 +6,10 @@ var visual_recognition = watson.visual_recognition({
     version_date: '2016-05-20'
 });
 
-var img = (
-  images_file: fs.createReadStream('./resources/')
-)
+var img = {
+  images_file: fs.createReadStream('./resources/dog.jpg'),
+  classifier_ids:'position_256496748'
+}
 visual_recognition.classify(img, function(err, res) {
     if (err)
         console.log(err);

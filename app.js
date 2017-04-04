@@ -9,10 +9,9 @@ const visual_recognition = watson.visual_recognition({
 });
 takePhoto();
 function classify() {
-
     var img = {
         images_file: fs.createReadStream('./dog2.jpg'),
-        classifier_ids: 'position_185473635'
+        classifierz_ids: 'position_185473635'
     }
     visual_recognition.classify(img, function(err, res) {
         if (err) {
@@ -28,13 +27,7 @@ function classify() {
         }
     });
 }
-
-
 function takePhoto() {
-try{
   camera.snap()
-
-}
-catch{
-  console.log("No img captured!");
-}
+  classify();
+ }

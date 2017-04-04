@@ -1,41 +1,15 @@
-var NodeWebcam = require("node-webcam");
-var fs = require('fs');
-var watson = require('watson-developer-cloud');
-var visual_recognition = watson.visual_recognition({
+const camera = require('ember-webcam');
+const fs = require('fs');
+const exec = require('child_process').exec;
+const watson = require('watson-developer-cloud');
+const visual_recognition = watson.visual_recognition({
     api_key: '290ef006ab8edf8c61fd8bed56fb9c85a103295a',
     version: 'v3',
     version_date: '2016-05-20'
 });
-var Webcam = NodeWebcam.create( opts );
-var opts = {
-
-    width: [ Number, 640 ],
-
-    height: [ Number, 480 ],
-
-    delay: [ Number, 0 ],
-
-    quality: [ Number, 100 ],
-
-    output: [ String, "jpeg" ],
-
-    verbose: [ Boolean, true ],
-
-    help: [ Boolean, false ],
-
-    version: [ Boolean, false ],
-
-    location: "./dog.jpg"
-
-};
-
-Webcam.capture( "dog.jpg", {}, function( err, data ) {
-
-    if ( !err ) console.log( "Image created!" );
-    classify();
-});
-classify();
+takePhoto();
 function classify() {
+
     var img = {
         images_file: fs.createReadStream('./dog2.jpg'),
         classifier_ids: 'position_185473635'
@@ -51,7 +25,16 @@ function classify() {
             err = pos_res.images[0].error[0].description
             console.log(err);
             //fs.unlink('dog.png')
-          Webcam.clear();
         }
     });
+}
+
+
+function takePhoto() {
+try{
+  camera.snap()
+
+}
+catch{
+  console.log("No img captured!");
 }

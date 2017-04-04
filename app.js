@@ -1,4 +1,3 @@
-const camera = require('ember-webcam');
 const fs = require('fs');
 const exec = require('child_process').exec;
 const watson = require('watson-developer-cloud');
@@ -9,9 +8,10 @@ const visual_recognition = watson.visual_recognition({
 });
 takePhoto();
 function classify() {
+
     var img = {
         images_file: fs.createReadStream('./dog2.jpg'),
-        classifierz_ids: 'position_185473635'
+        classifier_ids: 'position_185473635'
     }
     visual_recognition.classify(img, function(err, res) {
         if (err) {
@@ -27,7 +27,15 @@ function classify() {
         }
     });
 }
+
+
 function takePhoto() {
-  camera.snap()
-  classify();
- }
+
+  exec("sudo fswebcam dog.jpg", (error, stdout, stderr) => {
+  if (error) {
+    console.error(`exec error: ${error}`);
+    return;
+  }
+  console.log(`stdout: ${stdout}`);
+  console.log(`stderr: ${stderr}`);
+});

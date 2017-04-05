@@ -30,7 +30,7 @@ numTricks = 0;
 
 function session() {
     while (dog) {
-        for (i <= sessionLength; i++) {
+        for (i <= sessionLength; i++;) {
             var trick = math.random(0, numTricks)
             if (trick = 0) {
                 sit();
@@ -49,7 +49,7 @@ function sit() {
     if (position = "sit") {
         mPWM.pwmWrite(dutyCycle);
         mB.pwmWrite(HIGH);
-        mB.pwmWrite(LOW):
+        mB.pwmWrite(LOW);
             player.play('good-job.mp3', function(err) {
                 if (err) throw err
             })
@@ -65,7 +65,7 @@ function down() {
     if (position = "down") {
       mPWM.pwmWrite(dutyCycle);
       mB.pwmWrite(HIGH);
-      mB.pwmWrite(LOW):
+      mB.pwmWrite(LOW);
         player.play('good-job.mp3', function(err) {
             if (err) throw err
         })

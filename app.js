@@ -1,4 +1,4 @@
-const GPIO = require('PIGPIO').GPIO,
+const GPIO = require('pigpio').GPIO,
     PIR = new GPIO(10,{
         mode: GPIO.INPUT,
         edge: GPIO.RISING

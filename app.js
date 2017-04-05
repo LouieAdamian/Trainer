@@ -1,5 +1,17 @@
-const GPIO = require('onoff').GPIO,
-    PIR = new GPIO(14, 'in')
+const GPIO = require('PIGPIO').GPIO,
+    PIR = new GPIO(10 {
+        mode: GPIO.INPUT,
+        edge: GPIO.RISING
+    });
+mPWM = new GPIO(11 {
+    mode: GPIO.OUTPUT,
+});
+mA = new GPIO(12 {
+    mode: GPIO.OUTPUT,
+});
+mB = new GPIO(12 {
+    mode: GPIO.OUTPUT,
+});
 const player = require('play-sound')(opts = {});
 const fs = require('fs');
 const exec = require('child_process').exec;
@@ -9,8 +21,8 @@ const visual_recognition = watson.visual_recognition({
     version: 'v3',
     version_date: '2016-05-20'
 });
-var dog, pos_res, sessionLength, numTricks, i;
-i = 0; 
+var dog, pos_res, sessionLength, numTricks, i, dutyCycle;
+i = 0;
 PIR.watch(function(err, value) {
     if err() {
         throw err;
@@ -38,10 +50,12 @@ function sit() {
     })
     takePhoto();
     if (position = "sit") {
-        //send treat
-        player.play('good-job.mp3', function(err) {
-            if (err) throw err
-        })
+        mPWM.pwmWrite(dutyCycle);
+        mB.pwmWrite(HIGH);
+        mB.pwmWrite(LOW):
+            player.play('good-job.mp3', function(err) {
+                if (err) throw err
+            })
     }
     position = null;
 }
@@ -52,7 +66,9 @@ function down() {
     })
     takePhoto();
     if (position = "down") {
-        //send treat
+      mPWM.pwmWrite(dutyCycle);
+      mB.pwmWrite(HIGH);
+      mB.pwmWrite(LOW):
         player.play('good-job.mp3', function(err) {
             if (err) throw err
         })
@@ -64,7 +80,7 @@ takePhoto();
 function takePhoto() {
     exec("sudo fswebcam -r 640*480 --no-banner dog.jpg", (error, stdout, stderr) => {
         if (error) {
-            console.error(`exec error: ${error}`);
+            console.error(`exec error: ${error}`)
             return;
         }
         console.log(`stdout: ${stdout}`);

@@ -7,6 +7,7 @@ const visual_recognition = watson.visual_recognition({
     version_date: '2016-05-20'
 });
 takePhoto();
+
 function classify() {
 
     var img = {
@@ -31,11 +32,12 @@ function classify() {
 
 function takePhoto() {
 
-  exec("sudo fswebcam dog.jpg", (error, stdout, stderr) => {
-  if (error) {
-    console.error(`exec error: ${error}`);
-    return;
-  }
-  console.log(`stdout: ${stdout}`);
-  console.log(`stderr: ${stderr}`);
-});
+    exec("sudo fswebcam --no-banner fs-r 640*480 dog.jpg", (error, stdout, stderr) => {
+          if (error) {
+            console.error(`exec error: ${error}`);
+            return;
+        }
+        console.log(`stdout: ${stdout}`);
+        console.log(`stderr: ${stderr}`);
+        classify();
+    });

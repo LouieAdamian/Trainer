@@ -1,3 +1,4 @@
+const player = require('play-sound')(opts = {});
 const fs = require('fs');
 const exec = require('child_process').exec;
 const watson = require('watson-developer-cloud');
@@ -6,7 +7,45 @@ const visual_recognition = watson.visual_recognition({
     version: 'v3',
     version_date: '2016-05-20'
 });
-var pos_res;
+var pos_res, sessionLength, numTricks;
+
+numTricks=1;
+function session(){
+  for(int i=0;i<=sessionLength;i++){
+    var trick = math.random(0,numTricks)
+    if (trick = 0){
+      sit();
+    }else if (trick = 1) {
+      down();
+    }
+  }
+}
+
+function sit(){
+  player.play('sit.mp3', function(err){
+    if (err) throw err
+  })
+    takePhoto();
+  if (position = "sit"){
+    player.play('good-job.mp3', function(err) {
+      if (err) throw err
+    })
+  }
+  position = null;
+}
+
+function down(){
+  player.play('down.mp3', function(err){
+    if (err) throw err
+  })
+    takePhoto();
+  if (position = "down"){
+    player.play('good-job.mp3', function(err) {
+      if (err) throw err
+    })
+  }
+  position = null;
+}
 takePhoto();
 function takePhoto() {
 

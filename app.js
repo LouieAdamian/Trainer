@@ -1,5 +1,6 @@
 const fs = require('fs');
 const exec = require('child_process').exec;
+var pos_res;
 const watson = require('watson-developer-cloud');
 const visual_recognition = watson.visual_recognition({
     api_key: '290ef006ab8edf8c61fd8bed56fb9c85a103295a',
@@ -35,7 +36,6 @@ function classify() {
             console.log(position);
             err = pos_res.images[0].error[0].description
             console.log(err);
-            //fs.unlink('dog.png')
         }
     });
 }

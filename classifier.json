@@ -1,3 +1,0 @@
-{name: 'sit',
-sitTrainingDataset: fs.createReadStram(./training/sitTrainingDataset.zip)
-negative_examples: fs.createReadStream(./training/sitTrainingDataset.zip)}

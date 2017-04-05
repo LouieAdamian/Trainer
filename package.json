@@ -1,1 +1,21 @@
-{}
+{
+    "name": "trainer",
+    "description": "Trainer",
+    "version": "1.0.0",
+    "main": "app.js",
+    "dependencies": {},
+    "devDependencies": {},
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/LouieAdamian/Trainer.git"
+    },
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/LouieAdamian/Trainer/issues"
+    },
+    "homepage": "https://github.com/LouieAdamian/Trainer#readme"
+}

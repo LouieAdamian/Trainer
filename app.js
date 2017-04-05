@@ -1,15 +1,15 @@
 const GPIO = require('PIGPIO').GPIO,
-    PIR = new GPIO(10 {
+    PIR = new GPIO(10,{
         mode: GPIO.INPUT,
         edge: GPIO.RISING
     });
-mPWM = new GPIO(11 {
+mPWM = new GPIO(11, {
     mode: GPIO.OUTPUT,
 });
-mA = new GPIO(12 {
+mA = new GPIO(12, {
     mode: GPIO.OUTPUT,
 });
-mB = new GPIO(12 {
+mB = new GPIO(12, {
     mode: GPIO.OUTPUT,
 });
 const player = require('play-sound')(opts = {});

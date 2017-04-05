@@ -1,14 +1,13 @@
 const fs = require('fs');
 const exec = require('child_process').exec;
-var pos_res;
 const watson = require('watson-developer-cloud');
 const visual_recognition = watson.visual_recognition({
     api_key: '290ef006ab8edf8c61fd8bed56fb9c85a103295a',
     version: 'v3',
     version_date: '2016-05-20'
 });
+var pos_res;
 takePhoto();
-
 function takePhoto() {
 
   exec("sudo fswebcam -r 640*480 --no-banner dog.jpg", (error, stdout, stderr) => {
@@ -20,6 +19,7 @@ function takePhoto() {
   console.log(`stderr: ${stderr}`);
   classify();
 });
+}
 function classify() {
 
     var img = {

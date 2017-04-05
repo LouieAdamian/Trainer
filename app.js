@@ -23,12 +23,9 @@ const visual_recognition = watson.visual_recognition({
 });
 var dog, pos_res, sessionLength, numTricks, i, dutyCycle;
 i = 0;
-PIR.watch(function(err, value) {
-    if err() {
-        throw err;
-    }
-    dog = true;
-})
+PIR.on('interrupt', function(level){
+  dog = true
+});
 numTricks = 0;
 
 function session() {

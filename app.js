@@ -1,3 +1,5 @@
+const GPIO = require('onoff').GPIO,
+    PIR = new GPIO(14, 'in')
 const player = require('play-sound')(opts = {});
 const fs = require('fs');
 const exec = require('child_process').exec;
@@ -7,60 +9,71 @@ const visual_recognition = watson.visual_recognition({
     version: 'v3',
     version_date: '2016-05-20'
 });
-var pos_res, sessionLength, numTricks;
-
-numTricks=1;
-function session(){
-  for(int i=0;i<=sessionLength;i++){
-    var trick = math.random(0,numTricks)
-    if (trick = 0){
-      sit();
-    }else if (trick = 1) {
-      down();
+var dog, pos_res, sessionLength, numTricks, i;
+i = 0; 
+PIR.watch(function(err, value) {
+    if err() {
+        throw err;
     }
-  }
+    dog = true;
+})
+numTricks = 0;
+
+function session() {
+    while (dog) {
+        for (i <= sessionLength; i++) {
+            var trick = math.random(0, numTricks)
+            if (trick = 0) {
+                sit();
+            } else if (trick = 1) {
+                down();
+            }
+        }
+    }
 }
 
-function sit(){
-  player.play('sit.mp3', function(err){
-    if (err) throw err
-  })
-    takePhoto();
-  if (position = "sit"){
-    player.play('good-job.mp3', function(err) {
-      if (err) throw err
+function sit() {
+    player.play('sit.mp3', function(err) {
+        if (err) throw err
     })
-  }
-  position = null;
+    takePhoto();
+    if (position = "sit") {
+        //send treat
+        player.play('good-job.mp3', function(err) {
+            if (err) throw err
+        })
+    }
+    position = null;
 }
 
-function down(){
-  player.play('down.mp3', function(err){
-    if (err) throw err
-  })
-    takePhoto();
-  if (position = "down"){
-    player.play('good-job.mp3', function(err) {
-      if (err) throw err
+function down() {
+    player.play('down.mp3', function(err) {
+        if (err) throw err
     })
-  }
-  position = null;
+    takePhoto();
+    if (position = "down") {
+        //send treat
+        player.play('good-job.mp3', function(err) {
+            if (err) throw err
+        })
+    }
+    position = null;
 }
 takePhoto();
+
 function takePhoto() {
-
-  exec("sudo fswebcam -r 640*480 --no-banner dog.jpg", (error, stdout, stderr) => {
-  if (error) {
-    console.error(`exec error: ${error}`);
-    return;
-  }
-  console.log(`stdout: ${stdout}`);
-  console.log(`stderr: ${stderr}`);
-  classify();
-});
+    exec("sudo fswebcam -r 640*480 --no-banner dog.jpg", (error, stdout, stderr) => {
+        if (error) {
+            console.error(`exec error: ${error}`);
+            return;
+        }
+        console.log(`stdout: ${stdout}`);
+        console.log(`stderr: ${stderr}`);
+        classify();
+    });
 }
-function classify() {
 
+function classify() {
     var img = {
         images_file: fs.createReadStream('./dog.jpg'),
         classifier_ids: 'position_185473635'

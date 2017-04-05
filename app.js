@@ -1,17 +1,8 @@
-const GPIO = require('pigpio').GPIO,
-    PIR = new GPIO(10,{
-        mode: GPIO.INPUT,
-        edge: GPIO.RISING
+const Gpio = require('pigpio').Gpio,
+    PIR = new Gpio(10,{
+        mode: Gpio.INPUT,
+        edge: Gpio.RISING
     });
-mPWM = new GPIO(11, {
-    mode: GPIO.OUTPUT,
-});
-mA = new GPIO(12, {
-    mode: GPIO.OUTPUT,
-});
-mB = new GPIO(12, {
-    mode: GPIO.OUTPUT,
-});
 const player = require('play-sound')(opts = {});
 const fs = require('fs');
 const exec = require('child_process').exec;
@@ -27,7 +18,15 @@ PIR.on('interrupt', function(level){
   dog = true
 });
 numTricks = 0;
-
+mPWM = new Gpio(11, {
+    mode: Gpio.OUTPUT,
+});
+mA = new Gpio(12, {
+    mode: Gpio.OUTPUT,
+});
+mB = new Gpio(12, {
+    mode: Gpio.OUTPUT,
+});
 function session() {
     while (dog) {
         for (i <= sessionLength; i++;) {
